@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SARTHI DIGITAL CLASS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+    <!--  -->
+    <style>
+        .custom-popup {
+            display: none;
+            /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            z-index: 1000;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.6);
+            top: 0;
+            left: 0;
+        }
+
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 95%;
+            max-width: 450px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            text-align: center;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #aaa;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        #cancel-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+
+        #confirm-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+    </style>
+    <div id="custom-popup" class="custom-popup">
+        <div class="popup-content">
+            <!-- <span class="close-btn" onclick="closePopup()">&times;</span> -->
+            <h1 id="heading" class="text-bold text-2xl font-semibold">Saving Your Data, Please Wait...</h1>
+            <br />
+            <p id="confirmation-message" style="color: black;"></p>
+        </div>
+    </div>
+
+    <!-- <div class="button-container">
+        <button id="confirm-btn" onclick="submitForm()">Submit</button>
+        <button id="cancel-btn" onclick="closePopup()">Cancel</button>
+    </div> -->
+
+    <!--  -->
+
+    <style>
+        @import url(https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css);
+    </style>
+    <style>
+        /*
+    module.exports = {
+        plugins: [require('@tailwindcss/forms'),]
+    };
+    */
+        .form-radio {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            -webkit-print-color-adjust: exact;
+            color-adjust: exact;
+            display: inline-block;
+            vertical-align: middle;
+            background-origin: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            flex-shrink: 0;
+            border-radius: 100%;
+            border-width: 2px;
+        }
+
+        .form-radio:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+            border-color: transparent;
+            background-color: currentColor;
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        @media not print {
+            .form-radio::-ms-check {
+                border-width: 1px;
+                color: transparent;
+                background: inherit;
+                border-color: inherit;
+                border-radius: inherit;
+            }
+        }
+
+        .form-radio:focus {
+            outline: none;
+        }
+
+        .form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a0aec0'%3e%3cpath d='M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z'/%3e%3c/svg%3e");
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            -webkit-print-color-adjust: exact;
+            color-adjust: exact;
+            background-repeat: no-repeat;
+            padding-top: 0.5rem;
+            padding-right: 2.5rem;
+            padding-bottom: 0.5rem;
+            padding-left: 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            background-position: right 0.5rem center;
+            background-size: 1.5em 1.5em;
+        }
+
+        .form-select::-ms-expand {
+            color: #a0aec0;
+            border: none;
+        }
+
+        @media not print {
+            .form-select::-ms-expand {
+                display: none;
+            }
+        }
+
+        @media print and (-ms-high-contrast: active),
+        print and (-ms-high-contrast: none) {
+            .form-select {
+                padding-right: 0.75rem;
+            }
+        }
+    </style>
+
+    <form id="submit-to-google-sheet" enctype="multipart/form-data"
+        class="min-w-screen min-h-screen bg-gray-200 flex items-center justify-center px-5 pb-4 pt-4">
+        <div class="w-full mx-auto rounded-lg bg-white shadow-lg p-5 text-gray-700" style="max-width: 600px">
+            <div class="w-full pt-1 pb-5">
+                <!-- <div
+                    class="bg-indigo-500 text-white overflow-hidden rounded-full w-20 h-20 -mt-16 mx-auto shadow-lg flex justify-center items-center">
+                    <i class="mdi mdi-credit-card-outline text-3xl"></i>
+                </div> -->
+            </div>
+            <div class="mb-5">
+                <h1 class="text-center font-bold sm:text-xl lg:text-2xl uppercase">
+                    SARTHI DIGITAL CLASS
+                </h1>
+            </div>
+
+
+
+            <div class="mb-3">
+                <label class="font-bold text-sm mb-2 ml-1">
+                    Student Name
+                </label>
+                <div class="mt-1">
+                    <input
+                        class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                        placeholder="Enter full name" id="name" name="name" type="text" required />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="font-bold text-sm mb-2 ml-1">
+                    Mobile number ( Registered in Application )
+                </label>
+                <div class="mt-1">
+                    <input
+                        class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                        placeholder="Enter 10 Digits mobileNumber" type="text" id="mobile" name="mobile" required />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="font-bold text-sm mb-2 ml-1">
+                    Postal Address
+                </label>
+                <div class="mt-1">
+                    <input
+                        class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                        placeholder="Enter Postal Address" type="text" id="address" name="address" required />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="font-bold text-sm mb-2 ml-1">
+                    Course Name
+                </label>
+                <div class="mt-1">
+                    <input
+                        class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                        placeholder="Enter Course Name" type="text" id="coursename" name="coursename" required />
+                </div>
+
+                <div class="mt-3 mb-6">
+                    <label class="font-bold text-sm mb-2 ml-1">
+                        Attachment:- Fees receipt
+                    </label>
+                    <div class="mt-2">
+                        <!-- <input
+                            class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                            placeholder="Enter 10 Digits mobileNumber" type="text" /> -->
+
+                        <input type="file" name="file" onchange="handleFileSelect(event)"
+                            class="form-control w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                            placeholder="Fees receipt" required />
+                        <input type="hidden" id="fileData" name="fileData" />
+                        <input type="hidden" id="mimeType" name="mimeType" />
+                        <input type="hidden" id="fileName" name="fileName" />
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="mb-3 -mx-2 flex items-end">
+                <div class="px-2 w-1/2">
+                    <label class="font-bold text-sm mb-2 ml-1">Expiration date</label>
+                    <div class="mt-1">
+                        <select
+                            class="form-select w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
+                            <option value="01">01 - January</option>
+                            <option value="02">02 - February</option>
+                            <option value="03">03 - March</option>
+                            <option value="04">04 - April</option>
+                            <option value="05">05 - May</option>
+                            <option value="06">06 - June</option>
+                            <option value="07">07 - July</option>
+                            <option value="08">08 - August</option>
+                            <option value="09">09 - September</option>
+                            <option value="10">10 - October</option>
+                            <option value="11">11 - November</option>
+                            <option value="12">12 - December</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="px-2 w-1/2">
+                    <select
+                        class="form-select w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                    </select>
+                </div>
+            </div> -->
+            <!-- <div class="mb-10">
+                <label class="font-bold text-sm mb-2 ml-1">Security code</label>
+                <div>
+                    <input
+                        class="w-32 px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                        placeholder="000" type="text" />
+                </div>
+            </div> -->
+            <div>
+                <button
+                    class="block w-[200px] max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">
+                    <!-- <i    class="mdi mdi-check-circle w-12 h-12 mr-1"></i> -->
+                    SUBMIT NOW</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- BUY ME A BEER AND HELP SUPPORT OPEN-SOURCE RESOURCES -->
+    <div class="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
+        <div>
+            <a title="Buy me a beer" href="https://wa.me/1XXXXXXXXXX" target="_blank"
+                class="block w-16 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12">
+                <img class="object-cover object-center w-full h-full rounded-full"
+                    src="https://th.bing.com/th/id/R.18ba0e411b1586feb65e97d7deb45b5d?rik=OCbvCEPQbXn47g&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fwhatsapp-png-whatsapp-logo-png-1000.png&ehk=7BIVvksu2ccZPkUkoiU9T8Gx7a6xEIJ61o%2fGGN12nNM%3d&risl=&pid=ImgRaw&r=0" />
+            </a>
+        </div>
+    </div>
+
+
+
+    <script>
+        function openPopup(message) {
+            const popup = document.getElementById("custom-popup");
+            document.getElementById("confirmation-message").innerText = message;
+            popup.style.display = "flex";
+            popup.style.justifyContent = "center";
+            popup.style.alignItems = "center";
+        }
+
+        function closePopup() {
+            document.getElementById("custom-popup").style.display = "none";
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const fileData = e.target.result.split(',')[1]; // Base64 data
+                    document.getElementById('fileData').value = fileData;
+                    document.getElementById('mimeType').value = file.type;
+                    document.getElementById('fileName').value = file.name;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycby-4XFGEMiUkQPpV9jmwr_P9C0blApytRQXc76VOHF4HmtjR0sJH---v1Tg29y2S7QqTg/exec';
+        const form = document.forms['submit-to-google-sheet'];
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            let fullname = document.getElementById('name').value;
+            let mobile = document.getElementById('mobile').value;
+            let address = document.getElementById('address').value;
+            let coursename = document.getElementById('coursename').value;
+
+            const confirmationMessage = `Full Name: ${fullname}\nAddress: ${address}\nContact Details: ${mobile}\nCourse Name: ${coursename}\n`;
+
+            openPopup(confirmationMessage);
+
+            fetch(scriptURL, {
+                method: 'POST',
+                body: new FormData(form)
+            })
+                .then(response => {
+                    console.log('Success!', response);
+                    document.getElementById("heading").innerText = "Data Saved successfully! Close Window";
+                    document.getElementById("confirmation-message").innerText = "";
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 5000);
+                })
+                .catch(error => console.error('Error!', error.message));
+        });
+
+    </script>
+</body>
+
+</html>
