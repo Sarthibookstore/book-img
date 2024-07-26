@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <!-- Include jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <center><br>
+        <h2>Display Google Sheet Data on Webpage</h2>
+
+        <button type="button" onclick="location1()">SUMBIT</button>
+
+        <!-- Create a table to display the data -->
+        <table border="3" style="border:2px solid black" cellpadding="5px" id="dataTable">
+            <!-- Table content will be populated dynamically using JavaScript -->
+            <!-- <input type="text" id="data" placeholder="state"> -->
+            <!-- <input type="text" id="data" placeholder="city"> -->
+            <input type="text" id="data" placeholder="address" style="display: none;">
+        </table>
+    </center>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+    //         const isMobileDevice = /Mobi/.test(navigator.userAgent);
+    //         const isInWebView = window.matchMedia('(display-mode: standalone)').matches;
+    // let state1 = document.getElementById("data");
+    //          if (!isMobileDevice) {
+       
+    //         state1.style.display = "block";
+    //          }
+
+        let zipcodeValue = '89301';
+         let fullname= 'prayag';
+            let address = 'kow';
+        // 36925
+        // $(document).ready(function () {
+        function location1() {
+            // zipcodeValue = '77304'; // Example zip code value
+            // https://script.google.com/u/0/home/projects/1wwN6WBYCkF9oR-c7tt7jSkbmhHvHalb_wCLQhivqtB9HiGr0fmnQHabt/edit
+
+            //frenacle2 mian
+            // https://docs.google.com/spreadsheets/d/1pcjjO_8gGTuaMsL0l1udN86jG4sU3JIB12Fgjx2jhNQ/edit#gid=0
+          
+  
+            // jQuery.ajax({
+            //     url: 'https://script.google.com/macros/s/AKfycbxYcHhBJMYBLI35ta0gu8UQa-EyWbdkdj1Wix51c9NLGkeZlfiF_366KHGt_1MPELwg/exec',
+            //     type: 'post',
+            //     data: { 'zipcode': zipcodeValue },
+            //     // dataType: 'json', // Specify that the response is JSON
+            //     success: function (response) {
+            //         // Check if the response contains the website and websiteImmigration properties
+            //         if (response && response.website && response.websiteImmigration) {
+            //             var website = response.website;
+            //             var websiteImmigration = response.websiteImmigration;
+
+            //             // Now you can use website and websiteImmigration variables as needed
+            //             console.log('Website:', website);
+            //             console.log('Website (immigration):', websiteImmigration);
+
+            //             // Further processing if needed
+            //         } else {
+            //             console.log('Error: Invalid response format');
+            //         }
+            //     },
+            //     error: function (xhr, status, error) {
+            //         console.error('Error:', error);
+            //         console.log('Error: Unable to fetch data');
+            //     },
+            // });
+console.log('----------------------------------------------------');
+console.log(fullname);
+            // console.log(address2);
+
+            $.ajax({
+
+                url: 'https://script.google.com/macros/s/AKfycbxYRyeEtZO8Q1jHterzY-AFz_5MSZWnznr6oUXy8JW5dHKPgBZUxUnLAB68Odf2RjQ/exec',
+                // url: 'https://script.google.com/macros/s/AKfycbykwtjy50IIkBr6rTrXDMsm8TdUsZymaCyLcKk2OcHEBqky_r_pRzXvKLI3v7RS2a33/exec',
+                // 'https://script.google.com/macros/s/AKfycby_CEqAB1CWtxc5x0j63vzEe-A1rME6lgL1K95xUeRQLoDR68P9btIkVdjnooVaS7YJng/exec',
+                type: 'post',
+                data: { 'fullname': fullname },
+                success: function (result) {
+                    // Handle success if needed
+                    // console.log(JSON.stringify(result));
+                    console.log(result);
+                  
+                    // else {
+
+                            
+                        // location2();
+
+                        // if (isMobileDevice) {
+                        //     console.log('This is a mobile device.');
+                        //     // if (isInWebView) {
+                        //     //     console.log('The website is opened in a web view component of a mobile app.');
+                        //     // } else {
+                        //     //     console.log('The website is opened in a mobile browser.');
+                        //     // }
+                        // } else {
+                        //     console.log('This is not a mobile device (e.g., PC, laptop).');
+                            
+                        //     let address1 = state1.value;
+                            
+                        //     if(address1 != ' '){ location3(address1); }
+
+                        //     else{
+                        //         console.log('address is empty');
+                        //     }
+                        // }
+
+
+                    // }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                },
+            });
+
+        }
+
+
+
+        // function location2() {
+            
+        //         let city, state, address, pincode, lat1, long1, district;
+
+        //         // Request geolocation permission every time location2() is called
+        //         navigator.geolocation.getCurrentPosition(
+        //             function (position) {
+        //                 const lat = position.coords.latitude;
+        //                 const long = position.coords.longitude;
+
+        //                 const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${long}`;
+        //                 fetch(apiUrl)
+        //                     .then(response => response.json())
+        //                     .then(data => {
+        //                         state = data.address.state;
+        //                         city = data.address.city;
+        //                         district = data.address.district;
+        //                         address = data.display_name;
+        //                         pincode = data.address.postcode;
+        //                         lat1 = position.coords.latitude; // Assign lat and long here
+        //                         long1 = position.coords.longitude;
+
+        //                         console.log(`Your current city is ${city}`);
+        //                         console.log(`Your current state is ${state}`);
+        //                         console.log(`Your current address is ${address}`);
+        //                         console.log(`Your current zipcode is ${pincode}`);
+        //                         console.log(`Your current lat is ${lat1}`);
+        //                         console.log(`Your current long is ${long1}`);
+
+        //                         // Check if city, state, address, etc. are undefined or null and handle them as needed
+
+        //                         // Perform AJAX call with the retrieved data
+        //                         $.ajax({
+        //                             url: 'https://script.google.com/macros/s/AKfycbw70vMK7K_y6C8sr1lABNDdPrwXtuwpxDDJva5ZI1DUWUnQl0JhWdpPPqBmZkwW-0g/exec',
+        //                             type: 'post',
+        //                             data: { 'zipcode': zipcodeValue, 'city': city, 'state': state, 'address': address, 'pincode': pincode, 'lat': lat1, 'long': long1 },
+        //                         });
+        //                     })
+        //                     .catch(error => {
+        //                         console.error(error);
+        //                     });
+        //             },
+        //             function (error) {
+        //                 console.log("User denied the request for geolocation.");
+        //             }
+        //         );
+        //     }
+
+
+
+
+        //          function location3(address1) {
+
+                  
+        //                 let city, state, address, pincode, district;
+
+        //                 // Request geolocation permission every time location2() is called
+        //                 // navigator.geolocation.getCurrentPosition(
+        //                 //     function (position) {
+        //                         // const lat = position.coords.latitude;
+        //                         // const long = position.coords.longitude;
+
+        //                         // const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${long}`;
+        //                         // fetch(apiUrl)
+        //                         //     .then(response => response.json())
+        //                         //     .then(data => {
+        //                                 // state = data.address.state;
+        //                                 // city = data.address.city;
+        //                                 // district = data.address.district;
+        //                                 // address = data.display_name;
+        //                                 // pincode = data.address.postcode;
+        //                                 // lat1 = position.coords.latitude; // Assign lat and long here
+        //                                 // long1 = position.coords.longitude;
+
+        //                                 console.log(`Your pppppp city is ${address1}`);
+                           
+
+        //                                 // Check if city, state, address, etc. are undefined or null and handle them as needed
+
+        //                                 // Perform AJAX call with the retrieved data
+        //                                 $.ajax({
+        //                                     url: 'https://script.google.com/macros/s/AKfycbxVnPTQHFbf4ifGs2anOjWZFQdI8F2s-ggDBUQsldUfflzinlfvtJJ-fiZVroYIzBVZ/exec',
+        //                                     type: 'post',
+        //                                     data: { 'zipcode': zipcodeValue, 'city': 'none', 'state': 'noe', 'address': address1, 'pincode': 'none', 'lat': 'none', 'long': 'none' },
+        //                                 });
+        //                             // })
+        //                             // .catch(error => {
+        //                             //     console.error(error);
+        //                             // });
+        //                     // },
+        //                     // function (error) {
+        //                     //     console.log("User denied the request for geolocation.");
+        //                     // }
+        //                 // );
+        //             }
+                
+
+
+
+        // function location2() {
+        //     let city, state, address, pincode, lat1, long1, district;
+
+           
+        //     if ("geolocation" in navigator) {
+        //         navigator.geolocation.getCurrentPosition(
+        //             function (position) {
+        //                 const lat = position.coords.latitude;
+        //                 const long = position.coords.longitude;
+
+        //                 const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${long}`;
+        //                 fetch(apiUrl)
+        //                     .then(response => response.json())
+        //                     .then(data => {
+        //                         state = data.address.state;
+        //                         city = data.address.city;
+        //                         district = data.address.district;
+        //                         address = data.display_name;
+        //                         pincode = data.address.postcode;
+        //                         lat1 = position.coords.latitude; // Assign lat and long here
+        //                         long1 = position.coords.longitude;
+
+
+        //                         // state = data.address.state;
+        //                         // city = data.address.city;
+        //                         // const district = data.address.district;
+        //                         // address = data.display_name;
+        //                         // pincode = data.address.postcode;
+
+        //                         console.log(`Your current city is ${city}`);
+        //                         console.log(`Your current state is ${state}`);
+        //                         console.log(`Your current address is ${address}`);
+        //                         console.log(`Your current zipcode is ${pincode}`);
+        //                         console.log(`Your current lat is ${lat1}`);
+        //                         console.log(`Your current long is ${long1}`);
+
+        //                         console.log("zipcode1 = " + zipcodeValue);
+        //                         console.log("city = " + city);
+
+        //                         if (city == undefined || city.length == 0 || city == null) {
+        //                             city = "none";
+        //                         }
+
+        //                         if (state == undefined || state.length == 0 || state == null) {
+        //                             state = "none";
+        //                         }
+        //                         if (address == undefined || address.length == 0 || address == null) {
+        //                             address = "none";
+        //                         }
+
+        //                         if (pincode == undefined || pincode.length == 0 || pincode == null) {
+
+        //                             pincode = "none";
+        //                         }
+
+        //                         // if (lat == undefined || lat.length == 0 || lat == null) {
+
+        //                         // }
+
+        //                         // if (lat == undefined || lat.length == 0 || lat == null) {
+        //                         //     lat = "none";
+        //                         // }
+
+        //                         // ajaxcall(zipcodeValue, city);
+        //                         //pahse
+        //                         $.ajax({
+        //                             url: 'https://script.google.com/macros/s/AKfycby9QPsZ_YccyqVTzXpERdzyZzzDDqqu6gFgGULa8rvtFXAiok032AEWCtrqSJBhNWa7/exec',
+        //                             type: 'post',
+        //                             data: { 'zipcode': zipcodeValue, 'city': city, 'state': state, 'address': address, 'pincode': pincode, 'lat': lat1, 'long': long1 },
+        //                             // success: function (result1) {
+        //                             //     console.log(JSON.stringify(result1));
+        //                             //     console.log(result1);
+        //                             // },
+        //                             // error: function (xhr, status, error) {
+        //                             //     console.error('AJAX Error:', xhr.status, error);
+        //                             //     console.log('Response:', xhr.responseText);
+        //                             // },
+        //                         });
+
+        //                     })
+        //                     .catch(error => {
+        //                         // ajaxcall(zipcodeValue, "denined");
+        //                         console.error(error);
+
+        //                     });
+        //             },
+        //             function (error) {
+        //                 console.log("User denied the request for geolocation.");
+        //             }
+        //         );
+        //     } else {
+        //         console.log("User denied the request for geolocation.");
+        //     }
+
+        // }
+
+        // function ajaxcall(x, y) {
+        // console.log("zipcode1 = " + x);
+        // console.log("city = " + y);
+        // Now that city is assigned a value, perform AJAX call
+        // $.ajax({
+        //     url: 'https://script.google.com/macros/s/AKfycbyvmm8FZZ7YkaTYKVjXSI46hhdfixPBXNgoqD4JH8wAo71320rtoHuxQlIaeKv1VwFT/exec',
+        //     type: 'post',
+        //     data: { 'zipcode': x, 'city': y, 'state': state, 'address': address, 'pincode': pincode, 'lat': lat1, 'long': long1 },
+        //     // success: function (result1) {
+        //     //     console.log(JSON.stringify(result1));
+        //     //     console.log(result1);
+        //     // },
+        //     // error: function (xhr, status, error) {
+        //     //     console.error('AJAX Error:', xhr.status, error);
+        //     //     console.log('Response:', xhr.responseText);
+        //     // },
+        // });
+        // }
+
+    </script>
+
+
+    <!-- <script>
+        $(document).ready(function () {
+            const zipcodeValue = '10011'; // Example zip code value
+            // https://script.google.com/u/0/home/projects/1wwN6WBYCkF9oR-c7tt7jSkbmhHvHalb_wCL1K95xUeRQLoDR68P9btIkVdjnooVaS7YJng/edit
+            $.ajax({
+                url: 'https://script.google.com/macros/s/AKfycby_CEqAB1CWtxc5x0j63vzEe-A1rME6lgL1K95xUeRQLoDR68P9btIkVdjnooVaS7YJng/exec',
+                type: 'post',
+                data: { 'zipcode': zipcodeValue },
+                success: function (result) {
+                    // Handle success if needed
+                    console.log(JSON.stringify(result));
+                    console.log(result);
+
+                    if (!result || !result.hasOwnProperty('data') || !result.data.success) {
+                        // Handle "not found" scenario here
+                        console.error("Not found in the response:", result);
+                    } else {
+                        // Success handling
+                        console.log("Found! Data:", result.data);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                },
+            });
+
+        });
+    </script> -->
+    <!-- https://docs.google.com/spreadsheets/d/179ig-tXQNcG45E_4aDke40RRuAyvVVGL3Mi9i9vxWvI/edit#gid=0 -->
+
+    <!-- https://docs.google.com/spreadsheets/d/1pcjjO_8gGTuaMsL0l1udN86jG4sU3JIB12Fgjx2jhNQ/edit#gid=0 -->
+
+
+
+
+    <!-- function doPost(e) {
+    var zipCode = e.parameter.zipcode;
+    var sheet = SpreadsheetApp.openById('1pcjjO_8gGTuaMsL0l1udN86jG4sU3JIB12Fgjx2jhNQ').getSheetByName('Sheet1');
+    var data = sheet.getDataRange().getValues();
+    var website;
+    
+    for (var i = 0; i < data.length; i++) { if (data[i][0]==zipCode) { // Assuming zip code is in the first column
+        website=data[i][1]; // Assuming website is in the second column // visit=(data[i][2])++;
+        visitCount=parseInt(data[i][2]); // Assuming visit count is in the third column visitCount++; // Increment visit
+        count sheet.getRange(i + 1, 3).setValue(visitCount); break; } } return
+        ContentService.createTextOutput(website).setMimeType(ContentService.MimeType.TEXT); } -->
+
+</body>
+
+</html>
+
+
+    

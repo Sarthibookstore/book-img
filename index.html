@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book-1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: rgb(0, 0, 0) url(https://github.com/annafkt/frontend-mentor-challenges/blob/main/challenges/intro-component-with-signup-form/images/bg-intro-desktop.png?raw=true) no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.5rem 0;
+            font-family: Poppins, sans-serif;
+            color: #fff;
+            line-height: 1.5rem;
+            text-align: center;
+        }
+
+        section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        .introduction {
+            flex: 20.6rem;
+            max-width: 31.25rem;
+            align-self: center;
+        }
+
+
+        .input {
+            color: #7CB5DC;
+        }
+
+        @media (min-width: 57.2rem) {
+            .introduction {
+                text-align: left;
+            }
+        }
+
+        .introduction h2 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.3em;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-container {
+            max-width: 29.52875rem;
+        }
+
+        .price-info {
+            background-color: #6055a5;
+            border-radius: 0.5rem;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 0.4rem 0.06rem rgba(62, 60, 73, 30);
+        }
+
+        .price-info b {
+            font-weight: 700;
+        }
+
+        form {
+            padding: clamp(1rem, 5vw, 2rem);
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.4rem 0.06rem rgba(62, 60, 73, 30);
+        }
+
+        form input,
+        form button {
+            display: block;
+            width: 100%;
+            border-radius: 0.3rem;
+        }
+
+        .button1 {
+            display: block;
+            width: 100%;
+            border-radius: 0.3rem;
+        }
+
+        form .input-container {
+            display: grid;
+            margin-bottom: clamp(0.8rem, 3vw, 1.1rem);
+        }
+
+        form input {
+            grid-column: 1 / span 2;
+            grid-row: 1;
+            font-family: inherit;
+            font-weight: 600;
+            padding: 1em 3.5em 1em 1em;
+            border: 1px solid rgba(185, 182, 211, 70);
+        }
+
+        form input:hover {
+            background-color: rgba(185, 182, 211, 10);
+        }
+
+        form input:focus {
+            outline: none;
+            box-shadow: 0 0 1px 1px rgba(62, 60, 73, 50);
+        }
+
+        form input.invalid {
+            border: 2px solid #ff7a7a;
+        }
+
+        form input.invalid:focus {
+            box-shadow: 0 0 1px 1px #ff7a7a;
+        }
+
+        form input.invalid::placeholder {
+            color: #ff7a7a;
+        }
+
+        form .icon,
+        form .message {
+            display: none;
+        }
+
+        form .password-constraint.message,
+        form .error.message {
+            display: block;
+            grid-column: 1 / span 2;
+            grid-row: 2;
+            font-size: 0.7rem;
+            font-weight: 500;
+            line-height: normal;
+            text-align: right;
+            margin-top: 0.3em;
+            white-space: pre-wrap;
+        }
+
+        form .error.icon {
+            display: block;
+            grid-column: 2;
+            grid-row: 1;
+            place-self: center end;
+            margin-right: 1rem;
+        }
+
+        form .password-constraint.message {
+            color: #3e3c49;
+        }
+
+        form .error.message {
+            color: #ff7a7a;
+            font-style: italic;
+        }
+
+        form button {
+            background-color: #157a4e;
+            color: #fff;
+            border: transparent;
+            margin-bottom: clamp(0.8rem, 3vw, 1.1rem);
+            padding: 1em;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            box-shadow: 0 0.3rem #2fb67c;
+            line-height: 1.1rem;
+        }
+
+        .button1 {
+            background-color: #14a566;
+            color: #fff;
+            border: transparent;
+            margin-bottom: clamp(0.8rem, 3vw, 1.1rem);
+            padding: 1em;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            box-shadow: 0 0.3rem #2fb67c;
+            line-height: 1.1rem;
+        }
+
+        .button1:hover {
+            background-color: rgba(56, 204, 140, 80);
+        }
+
+        .button1:active {
+            transform: scale(0.98);
+            box-shadow: 0 0.2rem #2fb67c;
+        }
+
+
+        form button:hover {
+            background-color: rgba(56, 204, 140, 80);
+        }
+
+        form button:active {
+            transform: scale(0.98);
+            box-shadow: 0 0.2rem #2fb67c;
+        }
+
+
+
+
+
+        /*  */
+
+
+
+
+
+
+
+
+        .terms-of-service {
+            color: #b9b6d3;
+            font-size: 0.7rem;
+            line-height: 1.7em;
+        }
+
+        .terms-of-service a {
+            color: #ff7a7a;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .terms-of-service a:hover {
+            color: rgba(255, 122, 122, 70);
+        }
+
+        footer {
+            max-width: 30.6rem;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 10);
+            font-size: 0.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 2rem 0;
+            padding: 0.3rem 0;
+            border-radius: 0.3rem;
+        }
+
+        footer p:first-of-type::after {
+            content: " ";
+            white-space: pre-wrap;
+        }
+
+        footer a {
+            color: rgba(62, 60, 73, 80);
+            font-weight: 700;
+        }
+
+        footer a:hover {
+            color: rgba(62, 60, 73, 60);
+        }
+
+        footer a:active {
+            color: rgba(62, 60, 73, 80);
+        }
+    </style>
+    <!-- See the challenge on Frontend Mentor:
+
+https://www.frontendmentor.io/challenges/intro-component-with-signup-form-5cf91bd49edda32581d28fd1 -->
+
+    <style>
+        .custom-popup {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .custom-popup1 {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+
+        .popup-content1 {
+            background-color: transparent;
+            margin: 15% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .popup-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        #cancel-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+
+        #confirm-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+    </style>
+    <div id="custom-popup" class="custom-popup">
+
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2 id="heading" style="color: black;">Please Confirm</h2>
+            <p id="confirmation-message" style="color: black;"></p>
+            <div class="button-container">
+                <button id="confirm-btn" onclick="submitForm()">Submit</button>
+                <button id="cancel-btn" onclick="closePopup()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+
+    <section>
+        <div class="introduction">
+            <h2>સારથિ</h2>
+            <!-- <p>Complete the Payment on below QR Code and Then Fill up the form</p> -->
+            <p style="font-size: 15px;">
+                <!-- Complete the payment using the QR Code below, then fill out the form with the -->
+                <!-- provided UPI ID and
+                                                        transaction details. Please ensure to enter the UPI ID and transaction details accurately.
+                                                     -->
+                QR કોડ દ્વારા પેમેન્ટ કરીને નીચેની તમામ માહિતી પૂરી પાડવી ફરજીયાત છે.
+            
+                Payment કર્યા બાદ કોઈ સમસ્યા આવે નીચે દર્શાવેલ telegram કે whatsapp symbols પર ક્લિક કરીને જણાવવા વિનંતી
+            </p>
+
+            <!-- <div id="loading-popup" style="display: none;">
+                <p>Loading...</p>
+            </div> -->
+
+            <div id="loading-popup" class="custom-popup1" style="display: none;">
+                <div class="popup-content1">
+                    <center>
+                        <h2 id="heading" style="color: gray;">Loading QR Code</h2>
+                    </center>
+
+                </div>
+            </div>
+
+            <img id="paycode" src="" alt="Loading Please Wait" style="width: 310px;height:350px;">
+        </div>
+        <div class="form-container">
+            <p class="price-info"><b>Make your Book Order Now</b></p>
+            <form id="form">
+
+                <div class="input-container">
+                    <input id="name" type="text" name="name" aria-label="Full Name" placeholder="Full Name"
+                        class="input"  required>
+                        <!-- value="Prayag" -->
+
+                </div>
+                <div class="input-container">
+                    <input id="Address" type="text" name="Address" aria-label="Address" placeholder="Address" required
+                        class="input" 
+                        >
+                        <!-- value="Sr. no.49, Raja Nagar, Pune-14" -->
+
+                </div>
+                <div class="input-container">
+                    <input id="ContactDetails" type="text" name="ContactDetails" aria-label="Mobile number" class="input"
+                        placeholder="Mobile number" required>
+                    <!-- value="8070590007" -->
+                </div>
+                <div class="input-container">
+                    <input id="AlternativeContactDetails" type="text" name="AlternativeContactDetails" class="input"
+                        aria-label="Alternative contact details" placeholder="Alternative mobile number" required
+                        >
+                </div>
+
+                <div class="input-container">
+                    <input id="UPIID" type="text" name="UPIID" aria-label="UPIID" placeholder="UPI ID" required class="input">
+                    <!-- value="pryaag@oksbi" -->
+                </div>
+
+                <div class="input-container">
+                    <input id="TransactionID" type="text" name="TransactionID" aria-label="Transaction ID" class="input"
+                        placeholder="Transaction I'd" required 
+                        >
+                        <!-- value="wolsmkn678hbcey99knkn9" -->
+                </div>
+
+                <button type="button" id="formbutton">Sumbit Details</button>
+                <p class="terms-of-service">By clicking the button, you are agreeing to our <a class="input"
+                        href="#">Terms&nbsp;and&nbsp;Services</a></p>
+            </form>
+
+
+            <!-- <button id="button1" type="submit" onclick="location1()">2Sumbit Details</button>
+            <p class="terms-of-service">By clicking the button, you are agreeing to our <a
+                    href="#">Terms&nbsp;and&nbsp;Services</a>
+            </p> -->
+
+        </div>
+    </section>
+    <footer style="background-color: #f2f2fe;">
+
+        <div>
+            <style>
+                /* * {
+                    margin: 0;
+                    padding: 0;
+                } */
+
+                .container {
+                    /* height: 100vh;
+                    width: 100%; */
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: #f2f2fe;
+                }
+
+                .icons a {
+                    display: inline-flex;
+                    width: 50px;
+                    height: 50px;
+                    align-items: center;
+                    justify-content: center;
+                    text-decoration: none;
+                    font-size: 40px;
+                    margin: 10px;
+                    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+
+                    background-size: 100% 200%;
+                    background-position: 0% 5%;
+
+                    transition: background-position 0.5s, color 0.5s;
+                }
+
+                .icons a:nth-child(1) {
+                    color: #1976d3;
+                    background-image: linear-gradient(#fff 50%, #1976d3 50%);
+                }
+
+                /* .icons a:nth-child(2) {
+                    color: #db6f44;
+                    background-image: linear-gradient(#fff 50%, #db6f44 50%);
+                } */
+
+
+
+                .icons a:nth-child(2) {
+                    color: green;
+                    background-image: linear-gradient(#fff 50%, green 50%);
+                }
+
+                .icons a:hover {
+                    background-position: 0% 100%;
+                    color: #fff;
+                }
+            </style>
+
+            <div class="container">
+                <p style="color: black;font-size: 20px;">Contact Us:</p>
+                <div class="icons">
+                    <a href="">
+                    <i class="fab fa-telegram"></i>
+                    </a>
+
+
+                    <a href="">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+
+
+    <script src="./my.js"></script>
+</body>
+
+</html>

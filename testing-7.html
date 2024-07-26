@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Form Submission</title>
+</head>
+
+<body>
+    <form id="submit-to-google-sheet" enctype="multipart/form-data">
+        <div class="form-group">
+            <input type="text" id="name" name="name" placeholder="Name" required />
+            <input type="text" id="number" name="number" placeholder="Number" required />
+            <input type="file" name="file" onchange="handleFileSelect(event)" class="form-control" />
+            <input type="hidden" id="fileData" name="fileData" />
+            <input type="hidden" id="mimeType" name="mimeType" />
+            <input type="hidden" id="fileName" name="fileName" />
+            <div class="help-block with-errors"></div>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const fileData = e.target.result.split(',')[1]; // Base64 data
+                    document.getElementById('fileData').value = fileData;
+                    document.getElementById('mimeType').value = file.type;
+                    document.getElementById('fileName').value = file.name;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwIl4gfkw5qUgzO09WJpLnO55ENvDecp-4dfSjV8gsD5qgbN_-bqK5_OqhobN4wdC0Zug/exec';
+        const form = document.forms['submit-to-google-sheet'];
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            fetch(scriptURL, {
+                method: 'POST',
+                body: new FormData(form)
+            })
+                .then(response => console.log('Success!', response))
+                .catch(error => console.error('Error!', error.message));
+        });
+    </script>
+</body>
+
+</html>
